@@ -1,0 +1,339 @@
+body {
+  font-family: 'Barlow', sans-serif;
+}
+
+/* Navigation bar */
+div#navbarMenuHeroA {
+    flex-grow: 0;
+}
+
+.nav-container .navbar > div.container {
+  width: 0;
+}
+.hero-head nav.navbar.hp-nav {
+  position: absolute;
+  background-color: transparent;
+}
+
+#navbarMenuHeroA a.navbar-item,
+#navbarMenuHeroA a.navbar-item.is-active { 
+  font-size: 0.8rem;
+  letter-spacing: .092em;
+  color: rgb(179, 179, 179);
+}
+
+a.navbar-item.is-active, 
+a.navbar-item:hover {
+  background-color: rgb(31 87 136 / 51%);
+}
+
+/* logo */
+.navbar-brand a img {
+  width: 180px;
+  padding-top: 10px;
+}
+
+.navbar-burger {
+  height: 4.25rem;
+  color: #d7caca;
+}
+/* End of navigation bar */
+
+/* HERO section */
+.hero.is-primary {
+  background-color:rgb(100,100,100);
+}
+
+.hero::before {    
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.75;
+  /*background: url("//cdn-x.omniconvert.com/public/uploads/2022-02/3797eb45a25e6d3c3d89cf42896c5ba1.jpg") no-repeat fixed center;*/
+  background: url("../media/home.jpg") no-repeat fixed center;
+  background-size: cover;
+}
+
+.hero .hero-body .title {
+  line-height: 1.5em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.hero .hero-body .subtitle {
+  font-weight: 600;
+  line-height: 1.4em;
+  color: #c7c1c1;
+}
+
+.hero-body .hero-content {
+  opacity: 0.75;
+  border-radius: 0.6rem;
+  padding: 1rem 1rem;
+  background-color: rgb(31 87 136 / 51%);
+}
+/* End of HERO section */
+
+/* HERO animation */
+.animation-hero-section {
+  overflow: hidden;
+}
+
+/* Middle Line */
+.animation-hero-section .animation-hero-caption:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 49%;
+  width: 1px;
+  height: 0;
+  transition: top .5s, height .5s;
+  background-color: rgb(156, 154, 154, 100);
+}
+
+.animation-hero-section:hover .animation-hero-caption:before, 
+.animation-hero-section:active .animation-hero-caption:before {
+  top: 0;
+  height: 100%;
+}
+
+/* Left & Right Side */
+.animation-hero-section .leftSide {
+  position: absolute;
+  top: 0;
+  left: -125%;
+  width: 50%;
+  height: 100%;
+  transition: left .7s;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(56, 54, 54, 0.2) 100%);
+}
+
+.animation-hero-section:hover .leftSide,
+.animation-hero-section:active .leftSide {
+  left: 0;
+}
+
+/* Text */
+.animation-hero-section .rightInfo {
+  position: absolute;
+  top: 50%;
+  transition: opacity .6s, left .6s;
+  opacity: 0;
+}
+
+.animation-hero-section .rightInfo {
+  transform: translateY(-50%);
+  left: 100%;
+}
+
+.animation-hero-section:hover .rightInfo,
+.animation-hero-section:active .rightInfo {
+  opacity: 1;
+  left: 40%;
+}
+
+.hero-body.rightInfo {
+  max-width: 1000px;
+  width: 100%;
+}
+/* End of HERO animation */
+
+/* Code images container */
+.code-images-container img {
+  width: 650px;
+  object-fit: cover;
+  border-radius: 5px;
+  box-shadow: 3px 5px 10px;
+  /* Animation Images */
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+
+.code-images-container img:hover  {
+  -webkit-filter: grayscale(0);
+  filter: grayscale(0);
+}
+/* End of code images container */
+
+/* Laptop section */
+.laptop-section .mockup-macbook {
+  position: relative;
+  z-index: 3;
+
+  display: inline-block;
+  opacity: 0;
+  
+  transition: 500ms opacity;
+
+  font-size: 0;
+  text-align: center;
+  perspective: 2400px;
+  perspective-origin: 50% 100%;
+}
+
+.laptop-section  .mockup-macbook.loaded {
+  opacity: 1;
+}
+
+.laptop-section  .mockup-macbook .part .top-macbook,
+.laptop-section .mockup-macbook .part .bottom-macbook {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.laptop-section .mockup-macbook .part.top-macbook {
+  transform: translate3d(0, 0, 0) rotateX(-90deg);
+}
+
+.laptop-section .mockup-macbook:hover .part.top-macbook {
+  transform: translate3d(0, 0, 0) rotateX(0deg);
+}
+
+.laptop-section .mockup-macbook .part {
+  position: relative;
+  display: inline-block;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  transform-origin: 50% 100%;
+  transition: 900ms;
+}
+
+.laptop-section  .mockup-macbook.opened .part .top-macbook {
+  transform: translate3d(0, 0, -11px) rotateX(90deg) scale(1, 1);
+}
+
+.laptop-section .mockup-macbook .part .top-macbook {
+  transform-origin: 50% 0;
+  transform: translate3d(0, 0, -11px) rotateX(90deg);
+  transition: 900ms;
+}
+
+.laptop-section .mockup-macbook img {
+  display: block;
+  max-width: 100%;
+  backface-visibility: hidden;
+}
+
+.laptop-section .mockup-macbook .part .cover {
+  position: relative;
+}
+
+.laptop-section .mockup-macbook video {
+  position: absolute;
+  top: 8%;
+  left: 4%;
+  display: block;
+  transform: translate3d(0, 0, 1px);
+  border-radius: 6px;
+  width: 92%;
+  backface-visibility: hidden;
+}
+
+.laptop-section .mockup-macbook .part.bottom-macbook {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate3d(0, 0, 0) rotateX(-90deg);
+}
+
+.laptop-section .mockup-macbook .part .bottom-macbook {
+  transform-origin: 50% 0;
+  transform: translate3d(0,0,0) rotateX(90deg);
+}
+/* End of laptop section */
+
+/* FOOTER */
+.footer {
+  margin-top: 55px;
+  padding: 1rem 1.5rem 1rem;
+  background-color: #f4f3f3;
+  background-image: linear-gradient(360deg, #1118216b 0%, #ffffff 96%);
+}
+
+footer .columns {
+  gap: 0.3rem;
+}
+
+footer .about_content-footer, 
+footer .sublink, footer .copyright-text{
+  font-size: 0.8rem;
+}
+
+footer .sublink {
+  color: darkslategray;
+}
+
+footer hr {
+  border-top-color: #bbb;
+  height: 1px;
+  opacity: 0.3;
+}
+
+footer .social-icons a {
+  color:#818a91;
+  transition:all .2s linear;
+}
+
+@media screen and (max-width: 767px) {
+  footer .copyright-text, .social-icons {
+    text-align: center !important;
+    justify-content: center !important;
+  }
+}
+
+footer a:hover {
+  color:#1f3f7f;
+}
+
+@media screen and (min-width: 1024px) {
+  footer .section { 
+    padding: 2rem 4rem 2em 4rem;
+  }    
+}
+
+@media screen and (max-width: 767px) {
+  .footer {
+    padding: 1rem 0 1rem 0;
+  }
+}
+/* END OF FOOTER */
+
+/* MEDIA QUERY */
+@media (max-width: 480px) {
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .animation-hero-section:hover .rightInfo {
+    left: 0;
+  }
+
+  .laptop-section {
+    display: none;
+  }
+  
+  .code-images-container.columns .set1-pictures.desktop {
+    display: none;
+  }
+
+  .code-images-container img.set1-pictures.mobile {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 300px;
+  }
+}
+
+.title.play {
+    position: absolute;
+    top: 8rem;
+    left: 43%;
+}
+
+.container.play {
+  position: relative;
+}
