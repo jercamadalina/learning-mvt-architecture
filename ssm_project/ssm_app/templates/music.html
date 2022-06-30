@@ -1,83 +1,46 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-
-    {% load static %} <link rel="stylesheet" href="{% static '/css/blog.css' %}">
-
-    <!-- BLOG TITLE -->
-    <section class="hero is-large blog_hero-section">
+    {% load static %} <link rel="stylesheet" href="{% static '/css/music.css' %}">
+    <!-- MUSIC TITLE -->
+    <section class="hero is-large music_hero-section">
       <div class="hero-body is-flex is-justify-content-center is-align-items-center">
-        <h1 class="title is-size-4 blog-title has-text-centered"><span><</span><br>the best place to listen your favorite music<br>/></h1>
+        <h1 class="title is-size-4 music-title has-text-centered"><span><</span><br>the best place to listen your favorite music<br>/></h1>
       </div>
         <!-- SPLASH IMAGE -->
       {% load static %} <img src="{% static '/media/splash.png' %}" class="splash" alt="splash" />
     </section>
-
-    <!-- ARTICLES CONTAINER -->
-    <div class="container">
-    <div class="columns is-flex-wrap-wrap px-5 blog-container">
-
-        {% for song in songs %}
+    <!-- SONGS CONTAINER -->
+    <div class="container music">
+    <div class="columns is-flex-wrap-wrap px-5 music-container">
         <div class="column is-half mb-4 p-4">
-        <article>
-            <div class="card-image hover01">
-                <figure class="image">
-                    {% load static %} <img src="{% static '/media/test.jpg' %}" alt="Coding" width="380">
-                </figure>
-            </div>
-            <div class="blog-entry">
+        <article class="music-section">
+            {% for song in songs %}
+            <div class="music-entry">
+                <div class="column music_second-column">
+                    <!-- MUSIC HEADER -->
+                    <header class="music-entry-header">
+                        <h2 class="music-entry-title mt-4"><a href="#" class="is-size-5">{{ song.title }}</a></h2>
+                        <p class="">The Script</p>
 
-            <div class="column blog_second-column">
-                <!-- BLOG HEADER -->
-                <header class="blog-entry-header">
-                    <h2 class="blog-entry-title mt-4"><a href="#" class="is-size-4">{{ song.title }}</a></h2>
-                    <div class="blog-entry-meta is-flex">
-                        <div class="profile_image_container">
-                            {% load static %} <img src="{% static '/media/madi.png' %}" class="profile_image pt-1" height="50" width="50" alt="Madalina Jerca">
+                    </header>
+                    <!-- MUSIC CONTENT -->
+                    <div class="music-entry-content">
+                        <p>Description of the song: {{ song.description }}</p>
+                    </div>
+                    <!-- MUSIC FOOTER -->
+                    <footer class="music-entry-footer row">
+                        <div class="read-more col-md-6">
+                            <i class="fa fa-solid fa-plus ml-3"></i>
+                           <i class="fa fa-solid fa-play ml-3"></i>
+                           <i class="fa fa-solid fa-pause ml-3"></i>
                         </div>
-                        <div class="is-flex is-flex-direction-column ml-4">
-                            <span class="author">
-                                <a href="/">The Script</a>
-                            </span>
-                        </div>
-                    </div>
-                </header>
-<!--                 BLOG CONTENT -->
-                <div class="blog-entry-content">
-                    <p>A short description of the song: {{ song.description }}</p>
+                    </footer>
                 </div>
-<!--                 BLOG FOOTER -->
-                <footer class="blog-entry-footer row">
-                    <div class="read-more col-md-6">
-                        <a href="">Add to playlist</a>
-                    </div>
-                </footer>
             </div>
-                </div>
-        </article>
-
-        <!-- BLOG DIVIDERS -->
-        <article>
-            <div class="blog-entry left-side">
-            <div class="column blog_second-column">
-                <header class="blog-entry-header">
-                    <h2 class="blog-entry-title mt-6 has-text-centered"><a href="#">lorem ipsum dolor sit amet</a></h2>
-                </header>
-                <div class="blog-entry-content">
-                    <p> </p>
-                </div>
-                <footer class="blog-entry-footer row">
-                    <div class="read-more col-md-6">
-                        <a href=""></a>
-                    </div>
-                </footer>
-            </div>
-            </div>
+            {% endfor %}
         </article>
         </div>
-    {% endfor %}
-
     </div>
     </div>
-
 {% endblock %}

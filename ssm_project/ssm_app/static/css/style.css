@@ -7,9 +7,14 @@ div#navbarMenuHeroA {
     flex-grow: 0;
 }
 
+#navbarMenuHeroA .navbar-nav.ml-auto {
+  justify-content: center !important;
+}
+
 .nav-container .navbar > div.container {
   width: 0;
 }
+
 .hero-head nav.navbar.hp-nav {
   position: absolute;
   background-color: transparent;
@@ -337,3 +342,4 @@ footer a:hover {
 .container.play {
   position: relative;
 }
+
