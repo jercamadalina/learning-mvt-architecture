@@ -41,3 +41,9 @@ class SignUpView(CreateView):
     template_name = 'sign_up.html'
     form_class = SignUpForm
     success_url = reverse_lazy('/')
+
+
+def show_subscription_view(request):
+    return render(
+        request,
+        template_name='subscription.html')
