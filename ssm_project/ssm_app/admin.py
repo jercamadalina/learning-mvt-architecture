@@ -5,10 +5,11 @@ from django.contrib.auth.admin import UserAdmin
 
 
 # Register your models here.
-from ssm_app.models import Playlist, Album, Genre, Artist, Song
+from ssm_app.models import Playlist, Album, Genre, Artist, Song, SubscriptionPlan
 
 admin.site.register(Playlist)
 admin.site.register(Album)
 admin.site.register(Genre)
 admin.site.register(Artist)
 admin.site.register(Song)
+admin.site.register(SubscriptionPlan)

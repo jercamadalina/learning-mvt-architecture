@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from ssm_app.forms import SignUpForm
-from ssm_app.models import Song
+from ssm_app.models import Song, Playlist
 
 
 def homepage(request):
@@ -47,3 +47,10 @@ def show_subscription_view(request):
     return render(
         request,
         template_name='subscription.html')
+
+
+class PlaylistCreateView(CreateView):
+    model = Playlist
+    # form_class =
+    # template_name =
+    # success_url =
