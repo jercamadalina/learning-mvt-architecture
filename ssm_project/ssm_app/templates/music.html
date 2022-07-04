@@ -1,46 +1,67 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    {% load static %} <link rel="stylesheet" href="{% static '/css/music.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/music.css' %}">
     <!-- MUSIC TITLE -->
     <section class="hero is-large music_hero-section">
-      <div class="hero-body is-flex is-justify-content-center is-align-items-center">
-        <h1 class="title is-size-4 music-title has-text-centered"><span><</span><br>the best place to listen your favorite music<br>/></h1>
-      </div>
+        <div class="hero-body is-flex is-justify-content-center is-align-items-center">
+            <h1 class="title is-size-4 music-title has-text-centered"><span><</span><br>the best place to listen your
+                favorite music<br>/></h1>
+        </div>
         <!-- SPLASH IMAGE -->
-      {% load static %} <img src="{% static '/media/splash.png' %}" class="splash" alt="splash" />
+        {% load static %} <img src="{% static '/media/splash.png' %}" class="splash" alt="splash"/>
     </section>
     <!-- SONGS CONTAINER -->
     <div class="container music">
-    <div class="columns is-flex-wrap-wrap px-5 music-container">
-        <div class="column is-half mb-4 p-4">
-        <article class="music-section">
-            {% for song in songs %}
-            <div class="music-entry">
-                <div class="column music_second-column">
-                    <!-- MUSIC HEADER -->
-                    <header class="music-entry-header">
-                        <h2 class="music-entry-title mt-4"><a href="#" class="is-size-5">{{ song.title }}</a></h2>
-                        <p class="">The Script</p>
+        <div class="columns is-flex-wrap-wrap px-5 music-container">
+            <div class="column is-half mb-4 p-4">
+                <article class="music-section">
+                    {% for song in songs %}
+                        <div class="music-entry">
+                            <div class="column music_second-column">
+                                <!-- MUSIC HEADER -->
+                                <header class="music-entry-header">
+                                    <h2 class="music-entry-title mt-4"><a href="#"
+                                                                          class="is-size-5">{{ song.title }}</a></h2>
+                                    <p class="">The Script</p>
 
-                    </header>
-                    <!-- MUSIC CONTENT -->
-                    <div class="music-entry-content">
-                        <p>Description of the song: {{ song.description }}</p>
-                    </div>
-                    <!-- MUSIC FOOTER -->
-                    <footer class="music-entry-footer row">
-                        <div class="read-more col-md-6">
-                            <i class="fa fa-solid fa-plus ml-3"></i>
-                           <i class="fa fa-solid fa-play ml-3"></i>
-                           <i class="fa fa-solid fa-pause ml-3"></i>
+                                </header>
+                                <!-- MUSIC CONTENT -->
+                                <div class="music-entry-content">
+                                    <p>Description of the song: {{ song.description }}</p>
+                                </div>
+                                <!-- MUSIC FOOTER -->
+
+                                <footer class="music-entry-footer row">
+                                    <div class="read-more col-md-6">
+
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                <i class="fa fa-solid fa-plus ml-3"></i>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                {% for playlist in playlists %}
+                                                    <a class="dropdown-item" href="#">{{ playlist.name }}</a>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <i class="fa fa-solid fa-play ml-3"></i>
+                                        <audio controls>
+                                            {% if song.file %}
+                                                <source src="{{ song.file.url }}" type="audio/mpeg">
+                                            {% endif %}
+                                        </audio>
+                                        {#<i class="fa fa-solid fa-pause ml-3"></i>#}
+                                    </div>
+                                </footer>
+                            </div>
                         </div>
-                    </footer>
-                </div>
+                    {% endfor %}
+                </article>
             </div>
-            {% endfor %}
-        </article>
         </div>
-    </div>
     </div>
 {% endblock %}

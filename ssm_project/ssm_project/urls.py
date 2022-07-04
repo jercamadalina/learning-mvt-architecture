@@ -18,7 +18,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path
 
-from ssm_app.views import homepage, show_music_view, MyPasswordChangeView, SignUpView, show_blog_view
+from ssm_app.views import homepage, show_music_view, MyPasswordChangeView, SignUpView, show_blog_view, \
+    show_subscription_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,7 +33,9 @@ urlpatterns = [
     # LOGOUT
     path('logout/', LogoutView.as_view(), name='logout'),
     # REGISTRATION
-    path('sign_up', SignUpView.as_view(), name='sign_up')
+    path('sign_up', SignUpView.as_view(), name='sign_up'),
+    # SUBSCRIPTION
+    path('subscription/', show_subscription_view, name="subscription"),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

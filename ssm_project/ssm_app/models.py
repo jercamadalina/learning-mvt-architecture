@@ -1,8 +1,10 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
 class Playlist(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class Album(models.Model):
@@ -34,11 +36,18 @@ class Song(models.Model):
     published = models.DateField()
     created_at = models.DateTimeField(auto_now=True)
     state = models.IntegerField(choices=State.choices)
+    file = models.FileField(upload_to="static/media/")
+    sample = models.FileField(upload_to="static/sample/")
 
     def __str__(self):
         return f'Title: {self.title}, Author: {self.artists.first()}'
 
 
+class SubscriptionPlan(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    max_playlists = models.IntegerField()
+    max_logins = models.IntegerField() # Maximum logins automatically
 
 
 
