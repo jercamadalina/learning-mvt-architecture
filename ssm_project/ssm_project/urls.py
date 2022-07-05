@@ -18,8 +18,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path
 
-from ssm_app.views import homepage, show_music_view, MyPasswordChangeView, SignUpView, show_blog_view, \
-    show_subscription_view
+from ssm_app.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,6 +35,10 @@ urlpatterns = [
     path('sign_up', SignUpView.as_view(), name='sign_up'),
     # SUBSCRIPTION
     path('subscription/', show_subscription_view, name="subscription"),
+    # CREATE LIBRARY
+    path('create-playlist/', PlaylistCreateView.as_view(), name='playlist_create'),
+    # LIBRARY
+    path('playlist-list/', PlaylistListView.as_view(), name='playlist')
 ]
 
 urlpatterns += staticfiles_urlpatterns()

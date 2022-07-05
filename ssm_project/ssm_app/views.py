@@ -2,11 +2,10 @@ from django.contrib.auth.views import PasswordChangeView
 from django.http import HttpResponse
 from django.shortcuts import render
 
-
 # Create your views here.
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
-from ssm_app.forms import SignUpForm
+from django.views.generic import CreateView, ListView
+from ssm_app.forms import SignUpForm, PlaylistForm
 from ssm_app.models import Song, Playlist
 
 
@@ -26,7 +25,6 @@ def show_music_view(request):
 
 
 def show_blog_view(request):
-
     return render(
         request,
         template_name='blog.html')
@@ -51,6 +49,13 @@ def show_subscription_view(request):
 
 class PlaylistCreateView(CreateView):
     model = Playlist
-    # form_class =
-    # template_name =
-    # success_url =
+    form_class = PlaylistForm
+    template_name = 'playlist_create.html'
+    success_url = reverse_lazy('music')
+
+
+class PlaylistListView(ListView):
+    model = Playlist
+    context_object_name = 'all_playlists'
+    template_name = 'playlist_list.html'
+    

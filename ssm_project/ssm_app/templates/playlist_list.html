@@ -1,0 +1,21 @@
+{% extends 'base_temp.html' %}
+{% block content %}
+    <div class="row">
+            <div class="col-xl-4 col-md-6 col-12">
+        <a href="#">
+                <h4 class="h4">Create Playlist</h4>
+                <p>Creates a playlist</p>
+        </a>
+            </div>
+        {% for playlist in all_playlists %}
+            <div class="col-xl-4 col-md-6 col-12">
+                <h4 class="h4">{{ playlist.name }}</h4>
+                {% for song in playlist.songs %}
+                    <p>{{ song.title }}</p>
+                {% endfor %}
+                {#            {{ playlist }}#}
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
