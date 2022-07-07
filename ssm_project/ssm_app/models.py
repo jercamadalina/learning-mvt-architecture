@@ -4,7 +4,7 @@ from django.db import models
 
 class Playlist(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def songs(self):
         return Song.objects.filter(playlists__in=[self])

@@ -51,11 +51,18 @@ class PlaylistCreateView(CreateView):
     model = Playlist
     form_class = PlaylistForm
     template_name = 'playlist_create.html'
-    success_url = reverse_lazy('music')
+    success_url = reverse_lazy('playlist')
+
+    def form_valid(self, form):
+        valid = super().form_valid(form)
+        if valid:
+            playlist = form.save()
+            playlist.user = self.request.user
+            playlist.save()
+        return valid
 
 
 class PlaylistListView(ListView):
     model = Playlist
     context_object_name = 'all_playlists'
     template_name = 'playlist_list.html'
-    
