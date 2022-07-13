@@ -26,6 +26,6 @@ Run 'python manage.py migrate' to apply them."
 18. Mergem pe ruta `http://127.0.0.1:8000/admin/` si ne populam baza de date. 
     Putem sa facem asta si din [python manage.py shell -> from ssm_app.models import *]
 19. In `ssm_app` cream folderul `templates -> base.html -> homepage.html` (cu view-ul si template-ul aferent)
-20. Cream folderul `static`  -> media unde punem pozele
+20. Cream folderul `static`  -> media unde punem _pozele_
                              -> css -> style.css
 
