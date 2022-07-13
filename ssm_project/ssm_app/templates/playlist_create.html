@@ -1,0 +1,9 @@
+
+    <div>
+        <form method="post" id="data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Create Playlist</button>
+        </form>
+    </div>
+

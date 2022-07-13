@@ -18,8 +18,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path
 
-from ssm_app.views import homepage, show_music_view, MyPasswordChangeView, show_blog_view, \
-    register_view, login_view, logout_view, subscribe_view, CreateCheckoutSessionView, ProductLandingPageView
+from ssm_app.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,7 +38,13 @@ urlpatterns = [
     # Checkout session Stripe:
     path('create-checkout-session/', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
 
-    path('landing-page/', ProductLandingPageView.as_view(), name='landing-page')
+    path('landing-page/', ProductLandingPageView.as_view(), name='landing-page'),
+    # path('subscription/', show_subscription_view, name="subscription"),
+    # CREATE LIBRARY
+    path('create-playlist/', PlaylistCreateView.as_view(), name='playlist_create'),
+    # LIBRARY
+    path('playlist-list/', PlaylistListView.as_view(), name='playlist'),
+    path('add-song-to-playlist/', add_song_to_playlist_view, name='add_song_to_playlist'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

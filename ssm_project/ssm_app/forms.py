@@ -1,5 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django import forms
+
+from ssm_app.models import Playlist
 
 
 # class SignUpForm(UserCreationForm):
@@ -24,3 +27,8 @@ class CreateUserForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
 
 
+class PlaylistForm(forms.ModelForm):
+    class Meta:
+        model = Playlist
+        fields = '__all__'
+        exclude = ['user']
