@@ -38,7 +38,8 @@ urlpatterns = [
     # CREATE LIBRARY
     path('create-playlist/', PlaylistCreateView.as_view(), name='playlist_create'),
     # LIBRARY
-    path('playlist-list/', PlaylistListView.as_view(), name='playlist')
+    path('playlist-list/', PlaylistListView.as_view(), name='playlist'),
+    path('add-song-to-playlist/', add_song_to_playlist_view, name='add_song_to_playlist')
 ]
 
 urlpatterns += staticfiles_urlpatterns()

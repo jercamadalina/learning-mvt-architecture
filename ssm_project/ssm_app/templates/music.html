@@ -37,14 +37,27 @@
                                     <div class="read-more col-md-6">
 
                                         <div class="dropdown">
+
                                             <button class="btn btn-secondary dropdown-toggle" type="button"
                                                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false">
+
                                                 <i class="fa fa-solid fa-plus ml-3"></i>
+
                                             </button>
+
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 {% for playlist in playlists %}
-                                                    <a class="dropdown-item" href="#">{{ playlist.name }}</a>
+                                                    {% if playlist not in song.playlists.all %}
+                                                        <form method="post" action="{% url 'add_song_to_playlist' %}">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="playlist_id"
+                                                                   value="{{ playlist.id }}">
+                                                            <input type="hidden" name="song_id" value="{{ song.id }}">
+                                                            <button class="dropdown-item"
+                                                                    type="submit">{{ playlist.name }}</button>
+                                                        </form>
+                                                    {% endif %}
                                                 {% endfor %}
                                             </div>
                                         </div>
@@ -54,7 +67,7 @@
                                                 <source src="{{ song.file.url }}" type="audio/mpeg">
                                             {% elif song.sample and not request.user.is_authenticated %}
                                                 <source src="{{ song.sample.url }}" type="audio/mpeg">
-                                                {% else %}
+                                            {% else %}
                                                 No sources found
                                             {% endif %}
                                         </audio>
