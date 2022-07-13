@@ -19,7 +19,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path
 
 from ssm_app.views import homepage, show_music_view, MyPasswordChangeView, show_blog_view, \
-    register_view, login_view, logout_view, subscribe_view
+    register_view, login_view, logout_view, subscribe_view, CreateCheckoutSessionView, ProductLandingPageView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,7 +35,11 @@ urlpatterns = [
     # LOGIN
     path('login/', login_view, name='login'),
     # LOGOUT
-    path('logout/', logout_view, name='logout')
+    path('logout/', logout_view, name='logout'),
+    # Checkout session Stripe:
+    path('create-checkout-session/', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
+
+    path('landing-page/', ProductLandingPageView.as_view(), name='landing-page')
 ]
 
 urlpatterns += staticfiles_urlpatterns()

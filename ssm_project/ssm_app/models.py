@@ -49,6 +49,8 @@ class SubscriptionPlan(models.Model):
     max_playlists = models.IntegerField()
     max_logins = models.IntegerField() # Maximum logins automatically
 
+    def __str__(self):
+        return self.name
 
 
 

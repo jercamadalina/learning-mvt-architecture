@@ -9,7 +9,7 @@
 .container {
     width: 100%;
     min-height: 100vh;
-    background: #5c539d;
+    background: #2c2f33;
 }
 
 .container h2 {
@@ -30,7 +30,7 @@
 }
 
 .price-col {
-    background: #1f283b;
+    background: #343d52;
     padding: 10% 15%;
     border-radius: 10px;
     color: #ffffff;

@@ -6,36 +6,19 @@
     <div class="container">
         <h2>Choose your subscription plan</h2>
         <div class="price-row">
-            <div class="price-col">
-                <p>Starter</p>
-                <h3>19$ <span>/ month</span></h3>
-                <ul>
-                    <li>1 Account</li>
-                    <li>10 GB Disk Space</li>
-                    <li>Free Email Address</li>
-                </ul>
-                <button>Add To Cart</button>
-            </div>
-            <div class="price-col">
-                <p>Advanced</p>
-                <h3>19$ <span>/ month</span></h3>
-                <ul>
-                    <li>1 Account</li>
-                    <li>10 GB Disk Space</li>
-                    <li>Free Email Address</li>
-                </ul>
-                <button>Add To Cart</button>
-            </div>
-            <div class="price-col">
-                <p>Premium</p>
-                <h3>19$ <span>/ month</span></h3>
-                <ul>
-                    <li>1 Account</li>
-                    <li>10 GB Disk Space</li>
-                    <li>Free Email Address</li>
-                </ul>
-                <button>Add To Cart</button>
-            </div>
+            {% for subscription in subscriptions %}
+                <div class="price-col">
+                    <p>{{ subscription.name }}</p>
+                    <h3>{{ subscription.price }}$ <span>/ month</span></h3>
+                    <ul>
+                        <li>{{ subscription.max_logins }} Account</li>
+                        <li>{{ subscription.max_playlists }} Playlists</li>
+                        <li>Free Email Address</li>
+                    </ul>
+                    <button>Add To Cart</button>
+                </div>
+            {% endfor %}
+
         </div>
     </div>
 {% endblock %}

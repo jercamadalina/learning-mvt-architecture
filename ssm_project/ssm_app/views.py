@@ -2,14 +2,18 @@ from django.contrib.auth.models import User
 from django.contrib.auth.views import PasswordChangeView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, TemplateView
 from ssm_app.forms import CreateUserForm
-from ssm_app.models import Song, Playlist
+from ssm_app.models import Song, Playlist, SubscriptionPlan
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
+import stripe
+from django.views import View
+from django.conf import settings
 
 
 def homepage(request):
@@ -27,7 +31,7 @@ def show_music_view(request):
         context={'songs': songs})
 
 
-@login_required(login_url='login')
+@login_required
 def show_blog_view(request):
     return render(
         request,
@@ -98,4 +102,33 @@ def logout_view(request):
 
 # Defining a subscription plan view:
 def subscribe_view(request):
-    return render(request, template_name='subscription.html', context={})
+    subscriptions = SubscriptionPlan.objects.all()
+
+    return render(request, template_name='subscription.html', context={'subscriptions': subscriptions})
+
+
+# Creating a session view for Stripe
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+
+# Creating a class to render the landing template view:
+class ProductLandingPageView(TemplateView):
+    template_name = "stripe_payments/landing.html"
+
+
+class CreateCheckoutSessionView(View):
+    def post(self, request, *args, **kwargs):
+        YOUR_DOMAIN = "http://127.0.0.1:8000"
+        checkout_session = stripe.checkout.Session.create(
+            line_items=[
+                {
+                    # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+                    'price': '{{PRICE_ID}}',
+                    'quantity': 1,
+                },
+            ],
+            mode='payment',
+            success_url=YOUR_DOMAIN + '/success.html',
+            cancel_url=YOUR_DOMAIN + '/cancel.html',
+        )
+        return redirect(checkout_session.url, code=303)
