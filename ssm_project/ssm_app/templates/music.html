@@ -62,7 +62,7 @@
                                             </div>
                                         </div>
                                         <i class="fa fa-solid fa-play ml-3"></i>
-                                        <audio controls>
+                                        <audio>
                                             {% if song.file and request.user.is_authenticated %}
                                                 <source src="{{ song.file.url }}" type="audio/mpeg">
                                             {% elif song.sample and not request.user.is_authenticated %}
