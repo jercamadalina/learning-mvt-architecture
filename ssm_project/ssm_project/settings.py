@@ -123,4 +123,13 @@ LOGIN_REDIRECT_URL = '/'
 # Integration of Stripe payments
 STRIPE_PUBLIC_KEY = "pk_test_51LHqBQKyBoMgXtI9mORnSPPpAUF2jCrtsIqGDoCI9C0BOHGDwEnxhjGKISRo0xCcMziLvDy4J5vxN7H73asztspv00AbbA71Lm"
 STRIPE_SECRET_KEY = "sk_test_51LHqBQKyBoMgXtI9K9GoRKr2beFM8sD9aL4opTBWvSld3a2HIBRODP6t3y4KS9zSRypqD8XilOje5ifS9rMJcA3300pfexPDbU"
-STRIPE_WEBHOOK_SECRET = ""
+
+# Integration of SMTP Gmail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com '
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ssm.project.sda@gmail.com'
+EMAIL_HOST_PASSWORD = 'iavjeiwwnynthvas'
+
+DEFAULT_FROM_EMAIL = 'ssm.project.sda@gmail.com'

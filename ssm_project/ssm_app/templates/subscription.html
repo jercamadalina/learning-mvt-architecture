@@ -15,7 +15,11 @@
                         <li>{{ subscription.max_playlists }} Playlists</li>
                         <li>Free Email Address</li>
                     </ul>
-                    <button>Add To Cart</button>
+                    <form action="{% url 'create_checkout_session' %}" method="post">
+                        <button type="submit">Order</button>
+                        {% csrf_token %}
+                        <input type="hidden" name="stripe_subscription_id" value="{{ subscription.stripe_subscription_id }}">
+                    </form>
                 </div>
             {% endfor %}
 
