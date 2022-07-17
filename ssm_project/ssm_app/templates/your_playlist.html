@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static '/css/your_playlist.css' %}">
+    <div class="container playlist">
+         {% for playlist in all_playlists %}
+                <div class="playlist_container">
+                    <ul class="player-list">
+                        {% for song in playlist.songs %}
+                            <li onclick="document.getElementById('{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}').play()">
+                                <div class="list-info">
+                                    <div class="info-title">{{ song.title }}</div>
+                                    <div class="info-artist">BEARSON</div>
+                                </div>
+                            </li>
+                            <audio id="{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}">
+                                {% if song.file and request.user.is_authenticated %}
+                                    <source src="{{ song.file.url }}" type="audio/mpeg">
+                                {% elif song.sample and not request.user.is_authenticated %}
+                                    <source src="{{ song.sample.url }}" type="audio/mpeg">
+                                {% else %}
+                                    No sources found
+                                {% endif %}
+                            </audio>
+                        {% endfor %}
+                    </ul>
+                </div>
+             </div>
+         {% endfor %}
+    </div>
+{% endblock %}

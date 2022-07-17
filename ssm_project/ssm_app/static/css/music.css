@@ -37,10 +37,17 @@ img.splash {
 /* MUSIC */
 .music-container .column {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .read-more {
     margin-top: 3rem;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 .columns.music-container {
     margin-top: 1rem;
@@ -71,6 +78,26 @@ img.splash {
     box-shadow: none;
     background-image: none;
 
+}
+
+.btn-secondary.dropdown-playlist {
+    color: #000000;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.btn-secondary.dropdown-playlist:hover,
+.btn-secondary.dropdown-playlist:focus {
+    color: #000000;
+    background-color: transparent;
+    border-color: transparent;
+    border: none;
+}
+
+.btn-secondary {
+    color: #000000;
+    background-color: transparent;
+    border-color: transparent;
 }
 
 .music-entry .music-entry-title a {

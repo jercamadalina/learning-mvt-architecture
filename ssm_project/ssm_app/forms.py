@@ -32,3 +32,13 @@ class PlaylistForm(forms.ModelForm):
         model = Playlist
         fields = '__all__'
         exclude = ['user']
+        # labels = {
+        #     'name': 'Write your playlist name here'
+        # }
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'placeholder': 'Write your playlist name here'
+            }),
+        }
+
+

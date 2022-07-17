@@ -1,9 +1,13 @@
-
-    <div>
-        <form method="post" id="data">
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %} <link rel="stylesheet" href="{% static '/css/playlist_create.css' %}">
+    <img src="{% static '/media/bgw.jpg' %}" class="d-block w-100" alt="...">
+    <div class="container create">
+        <form method="post" id="data" class="custom_form">
             {% csrf_token %}
+            <h2 class="text-center">Enjoy every moment with <br> music for your soul</h2>
             {{ form.as_p }}
             <button type="submit">Create Playlist</button>
         </form>
     </div>
-
+{% endblock %}
