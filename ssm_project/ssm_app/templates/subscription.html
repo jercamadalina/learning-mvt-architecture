@@ -1,9 +1,9 @@
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
-    {% load static %}
     <link rel="stylesheet" href="{% static '/css/subscription.css' %}">
-    <div class="container">
+    <div class="container subscription">
         <h2>Choose your subscription plan</h2>
         <div class="price-row">
             {% for subscription in subscriptions %}
@@ -19,25 +19,10 @@
                         <button type="submit">Order</button>
                         {% csrf_token %}
                         <input type="hidden" name="stripe_subscription_id" value="{{ subscription.stripe_subscription_id }}">
+                        <input type="hidden" name="subscription_id" value="{{ subscription.id }}">
                     </form>
                 </div>
             {% endfor %}
-
         </div>
     </div>
 {% endblock %}
-
-
-
-
-
-{#{% load static %}#}
-{##}
-{#{% block content %}#}
-{##}
-{##}
-{#    <div>#}
-{#        Hello#}
-{#    </div>#}
-{##}
-{#{% endblock %}#}

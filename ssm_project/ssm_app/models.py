@@ -58,3 +58,9 @@ class SubscriptionPlan(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Profile(models.Model):
+    payed = models.BooleanField(default=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    subscription = models.ForeignKey(SubscriptionPlan, on_delete=models.CASCADE, null=True, blank=True)

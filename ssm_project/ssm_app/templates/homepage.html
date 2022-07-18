@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-
     <!-- HERO SECTION -->
     <section class="hero is-primary is-medium container is-fluid is-fullheight animation-hero-section">
       <div class="animation-hero-wrapper">
@@ -12,7 +11,7 @@
             <div class="hero-body is-flex-direction-column is-justify-content-center rightInfo">
               <div class="container hero-content has-text-centered is-flex is-flex-direction-column is-justify-content-center">
                   <h1 class="title has-text-centered is-size-3-desktop">Welcome to our website!</h1>
-                  <h2 class="subtitle has-text-centered is-size-6-desktop">We are Madalina, Silviu and Stefan and this is our first project in Django.
+                  <h2 class="subtitle has-text-centered is-size-6-desktop">We are Silviu, Stefan and Madalina and this is our first project in Django.
                   <br> We have a diverse set of skills, ranging from HTML, CSS, <br>JavaScript, all the way to Python and MySql.
                   </h2>
               </div>
@@ -20,7 +19,6 @@
         </div>
       </div>
     </section>
-
     <!-- LAPTOP SECTION -->
     <div class="container play">
       <h1 class="title play">PRESS PLAY</h1>
@@ -31,7 +29,7 @@
           <img src="https://d1xm195wioio0k.cloudfront.net/images/mockup/macbook-top.svg" alt="" class="top-macbook">
           <img src="https://d1xm195wioio0k.cloudfront.net/images/mockup/macbook-cover.svg" alt="" class="cover">
           <video autoplay controls>
-            <source src="/media/myscreen.mp4" type="video/mp4">
+            {% load static %} <source src="{% static '/media/my_screen.mp4' %}" type="video/mp4">
           </video>
         </div>
         <div class="part bottom-macbook">
@@ -41,5 +39,4 @@
       </div>
       </div>
     </div>
-
 {% endblock %}

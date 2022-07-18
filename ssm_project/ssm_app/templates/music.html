@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
     <link rel="stylesheet" href="{% static '/css/music.css' %}">
     <!-- MUSIC TITLE -->
     <section class="hero is-large music_hero-section">
@@ -38,7 +37,7 @@
 
                                         <div class="dropdown">
 
-                                            <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            <button class="btn btn-secondary dropdown-toggle dropdown-playlist" type="button"
                                                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false">
 
@@ -62,7 +61,7 @@
                                             </div>
                                         </div>
                                         <i class="fa fa-solid fa-play ml-3"></i>
-                                        <audio controls>
+                                        <audio>
                                             {% if song.file and request.user.is_authenticated %}
                                                 <source src="{{ song.file.url }}" type="audio/mpeg">
                                             {% elif song.sample and not request.user.is_authenticated %}

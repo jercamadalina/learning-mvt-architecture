@@ -1,3 +1,4 @@
+from django.conf.global_settings import MEDIA_ROOT
 from django.contrib.auth.models import User
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeForm
 from django.shortcuts import render, redirect
@@ -19,8 +20,8 @@ import stripe
 from django.views import View
 from django.conf import settings
 from django.views.generic import CreateView, ListView
-from ssm_app.forms import PlaylistForm
-from ssm_app.models import Song, Playlist
+from ssm_app.forms import *
+from ssm_app.models import *
 
 
 def homepage(request):
@@ -29,14 +30,28 @@ def homepage(request):
         template_name='homepage.html')
 
 
-def show_music_view(request):
+def your_playlist(request):
     songs = Song.objects.all()
     playlist = Playlist.objects.all()
 
     return render(
         request,
-        template_name='music.html',
+        template_name='your_playlist.html',
         context={'songs': songs, 'playlists': playlist})
+
+
+def show_music_view(request):
+    songs = Song.objects.all()
+    playlist = Playlist.objects.all()
+    search_text = request.GET.get('search', '')
+
+    if search_text:
+        songs = songs.filter(title__contains=search_text)
+
+    return render(
+        request,
+        template_name='music.html',
+        context={'songs': songs, 'search_text': search_text, 'playlists': playlist})
 
 
 def show_blog_view(request):
@@ -63,7 +78,7 @@ class PlaylistCreateView(CreateView):
 class PlaylistListView(ListView):
     model = Playlist
     context_object_name = 'all_playlists'
-    template_name = 'playlist_list.html'
+    template_name = 'your_library.html'
 
 
 def add_song_to_playlist_view(request):
@@ -145,6 +160,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 class CreateCheckoutSessionView(View):
     def post(self, request, *args, **kwargs):
+        subscription_id = request.POST.get('subscription_id')
         stripe_subscription_id = request.POST.get('stripe_subscription_id')
         YOUR_DOMAIN = "http://127.0.0.1:8000/"
         checkout_session = stripe.checkout.Session.create(
@@ -159,12 +175,18 @@ class CreateCheckoutSessionView(View):
             success_url=YOUR_DOMAIN + 'success/',
             cancel_url=YOUR_DOMAIN + 'cancel/',
         )
+        profile = Profile.objects.filter(user=request.user).first()
+        profile.subscription_id = subscription_id
+        profile.save()
         return redirect(checkout_session.url, code=303)
 
 
 # Creating a succcess html template view:
 @login_required(login_url='login')
 def success_view(request):
+    profile = Profile.objects.filter(user=request.user).first()
+    profile.payed = True
+    profile.save()
     return render(request, template_name="stripe_payments/success.html", context={})
 
 

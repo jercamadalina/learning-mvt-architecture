@@ -22,6 +22,7 @@ from ssm_app.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('ssm_app.urls')),
+
 ]
 
 urlpatterns += staticfiles_urlpatterns()
