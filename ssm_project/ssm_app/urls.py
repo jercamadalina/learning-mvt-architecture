@@ -2,12 +2,12 @@ from django.urls import path
 
 from ssm_app.views import *
 
+from django.contrib.auth import views as auth_views
+
 urlpatterns = [
     path('', homepage, name='home'),
     path('music/', show_music_view, name='music'),
     path('blog/', show_blog_view, name='blog'),
-    # CHANGE PASSWORD
-    path('password-change/', MyPasswordChangeView.as_view(), name='password_change'),
     # SUBSCRIPTION
     path('subscription/', subscribe_view, name='subscribe'),
     # REGISTRATION
@@ -16,11 +16,25 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     # LOGOUT
     path('logout/', logout_view, name='logout'),
+    # PASSWORD CHANGE
+    path('password/', PasswordsChangeView.as_view(), name='change_password'),
+    # PASSWORD CHANGE_SUCCESSFUL
+    path('password_success/', password_success, name='password_success'),
+
+    # PASSWORD RESET
+    path('reset-password/', auth_views.PasswordResetView.as_view(template_name='registration/password_reset.html'),
+         name='reset_password'),
+    # PASSWORD RESET DONE
+    path('reset-password-sent/',
+         auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'),
+         name='password_reset_done'),
+    # PASSWORD RESET CONFIRM (Link in email)
+    path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    # PASSWORD RESET COMPLETE (Success message)
+    path('reset-password-complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 
     # Checkout session Stripe:
     path('create-checkout-session/', CreateCheckoutSessionView.as_view(), name='create_checkout_session'),
-
-    # path('subscription/', show_subscription_view, name="subscription"),
 
     # CREATE LIBRARY
     path('create-playlist/', PlaylistCreateView.as_view(), name='playlist_create'),
