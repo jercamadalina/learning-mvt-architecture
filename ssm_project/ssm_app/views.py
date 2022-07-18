@@ -181,6 +181,7 @@ class CreateCheckoutSessionView(View):
         )
         profile = Profile.objects.filter(user=request.user).first()
         profile.subscription_id = subscription_id
+        profile.save()
         return redirect(checkout_session.url, code=303)
 
 
