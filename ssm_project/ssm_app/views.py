@@ -182,6 +182,3 @@ class CreateCheckoutSessionView(View):
         )
         return redirect(checkout_session.url, code=303)
 
-
-def index(request):
-    return render(request, "app/videoplay.html", {'media': MEDIA_ROOT})

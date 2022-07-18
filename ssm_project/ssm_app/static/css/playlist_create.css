@@ -66,3 +66,8 @@
 .custom_form button:hover{
     transform: scale(1.1);
 }
+
+#navbarMenuHeroA a.navbar-item,
+#navbarMenuHeroA a.navbar-item.is-active {
+    color: #000000;
+}

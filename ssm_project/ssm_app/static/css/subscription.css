@@ -115,3 +115,7 @@
 .price-col button:hover{
     background: #c7c1c1;
 }
+#navbarMenuHeroA a.navbar-item,
+#navbarMenuHeroA a.navbar-item.is-active {
+    color: #000000;
+}

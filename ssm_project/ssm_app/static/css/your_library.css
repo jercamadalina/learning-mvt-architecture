@@ -242,3 +242,8 @@ a.navbar-item-playlist:hover {
     -webkit-text-stroke-width: thin;
     padding-bottom: 4rem;
 }
+
+#navbarMenuHeroA a.navbar-item,
+#navbarMenuHeroA a.navbar-item.is-active {
+    color: #000000;
+}
