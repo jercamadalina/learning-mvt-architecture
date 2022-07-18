@@ -7,7 +7,7 @@ class Playlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def songs(self):
-        return Song.objects.filter(playlists__in=[self])
+        return Song.objects.filter(playlists__in=[self, ])
 
     def __str__(self):
         return f'{self.name} {self.user}'

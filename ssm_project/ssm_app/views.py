@@ -30,14 +30,14 @@ def homepage(request):
         template_name='homepage.html')
 
 
-def your_playlist(request):
-    songs = Song.objects.all()
-    playlist = Playlist.objects.all()
+def your_playlist(request, pk):
+
+    playlist = Playlist.objects.get(id=pk)
 
     return render(
         request,
         template_name='your_playlist.html',
-        context={'songs': songs, 'playlists': playlist})
+        context={'playlist': playlist})
 
 
 def show_music_view(request):
@@ -69,7 +69,21 @@ class PlaylistCreateView(CreateView):
     model = Playlist
     form_class = PlaylistForm
     template_name = 'playlist_create.html'
-    success_url = reverse_lazy('playlist')
+
+    # success_url = reverse_lazy('playlist')
+
+# todo fix when no song_id present
+    def get_success_url(self):
+        playlist = self.object
+        song_id = self.request.GET['song_id']
+        song = Song.objects.get(id=song_id)
+        song.playlists.add(playlist)
+        song.save()
+
+        next_ = self.request.GET.get('next')
+        if next_ is not None:
+            return next_
+        return self.request.META['HTTP_REFERER']
 
     def form_valid(self, form):
         valid = super().form_valid(form)

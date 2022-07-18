@@ -37,7 +37,8 @@
 
                                         <div class="dropdown">
 
-                                            <button class="btn btn-secondary dropdown-toggle dropdown-playlist" type="button"
+                                            <button class="btn btn-secondary dropdown-toggle dropdown-playlist"
+                                                    type="button"
                                                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false">
 
@@ -46,6 +47,14 @@
                                             </button>
 
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <form method="get" action="{% url 'playlist_create' %}">
+
+                                                    <input type="hidden" name="next" value="{{ request.path }}">
+                                                    <input type="hidden" name="song_id" value="{{ song.id }}">
+                                                    <button class="dropdown-item"
+                                                            type="submit">Create playlist
+                                                    </button>
+                                                </form>
                                                 {% for playlist in playlists %}
                                                     {% if playlist not in song.playlists.all %}
                                                         <form method="post" action="{% url 'add_song_to_playlist' %}">

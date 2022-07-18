@@ -38,5 +38,5 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('create-checkout-session/', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
     # path('subscription/', show_subscription_view, name="subscription"),
-    path('your_playlist/', your_playlist, name='your_playlist'),
+    path('your_playlist/<int:pk>/', your_playlist, name='your_playlist'),
 ]

@@ -7,60 +7,60 @@
     <link rel="stylesheet" href="{% static '/css/your_playlist.css' %}">
     <img src="{% static '/media/bgw.jpg' %}" class="d-block w-100" alt="...">
     <div class="container playlist">
-                <div class="playlist_container">
-                    <table class="player-list container-table">
-                    <thead>
-                      <tr>
-{#                          <th class="containerTable-lblTitle">#</th>#}
-                          <th class="containerTable-lblTitle">TITLE</th>
-                          <th class="containerTable-lblTitle">ARTIST</th>
-                          <th class="containerTable-lblTitle">DURATION</th>
-                          <th class="containerTable-lblTitle">PLAY</th>
-                      </tr>
-                      </thead>
-                     {% for playlist in playlists %}
-                        {% for song in playlist.songs %}
-                            <tbody class="containerTable-body">
-                      <tr onclick="document.getElementById('{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}').play()">
-{#                        <td class="containerTable-lblValue">1</td>#}
-                          <td class="containerTable-lblValue">{{ song.title }}</td>
+        <div class="playlist_container">
+            <table class="player-list container-table">
+                <thead>
+                <tr>
+                    {#                          <th class="containerTable-lblTitle">#</th>#}
+                    <th class="containerTable-lblTitle">TITLE</th>
+                    <th class="containerTable-lblTitle">ARTIST</th>
+                    <th class="containerTable-lblTitle">DURATION</th>
+                    <th class="containerTable-lblTitle">PLAY</th>
+                </tr>
+                </thead>
+                {#                     {% for playlist in playlists %}#}
+                {% for song in playlist.songs %}
+                    <tbody class="containerTable-body">
+                    <tr onclick="document.getElementById('{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}').play()">
+                        {#                        <td class="containerTable-lblValue">1</td>#}
+                        <td class="containerTable-lblValue">{{ song.title }}</td>
                         <td class="containerTable-lblValue">Maria Anders</td>
                         <td class="containerTable-lblValue">03:24</td>
-                          <td class="containerTable-lblValue"><i class="fa fa-play"></i></td>
-                      </tr>
-                            </tbody>
-                        <audio id="{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}">
-                            {% if song.file and request.user.is_authenticated %}
-                                <source src="{{ song.file.url }}" type="audio/mpeg">
-                            {% elif song.sample and not request.user.is_authenticated %}
-                                <source src="{{ song.sample.url }}" type="audio/mpeg">
-                            {% else %}
-                                No sources found
-                            {% endif %}
-                        </audio>
-                        {% endfor %}
-                         {% endfor %}
-                    </table>
-{#                    <ol class="player-list">#}
-{#                        {% for song in playlist.songs %}#}
-{#                            <li onclick="document.getElementById('{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}').play()">#}
-{#                                <div class="list-info">#}
-{#                                    <div class="info-title">{{ song.title }}</div>#}
-{#                                    <div class="info-artist">BEARSON</div>#}
-{#                                </div>#}
-{#                            </li>#}
-{#                            <audio id="{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}">#}
-{#                                {% if song.file and request.user.is_authenticated %}#}
-{#                                    <source src="{{ song.file.url }}" type="audio/mpeg">#}
-{#                                {% elif song.sample and not request.user.is_authenticated %}#}
-{#                                    <source src="{{ song.sample.url }}" type="audio/mpeg">#}
-{#                                {% else %}#}
-{#                                    No sources found#}
-{#                                {% endif %}#}
-{#                            </audio>#}
-{#                        {% endfor %}#}
-{#                    </ol>#}
-                </div>
-             </div>
+                        <td class="containerTable-lblValue"><i class="fa fa-play"></i></td>
+                    </tr>
+                    </tbody>
+                    <audio id="{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}">
+                        {% if song.file and request.user.is_authenticated %}
+                            <source src="{{ song.file.url }}" type="audio/mpeg">
+                        {% elif song.sample and not request.user.is_authenticated %}
+                            <source src="{{ song.sample.url }}" type="audio/mpeg">
+                        {% else %}
+                            No sources found
+                        {% endif %}
+                    </audio>
+                {% endfor %}
+                {#                         {% endfor %}#}
+            </table>
+            {#                    <ol class="player-list">#}
+            {#                        {% for song in playlist.songs %}#}
+            {#                            <li onclick="document.getElementById('{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}').play()">#}
+            {#                                <div class="list-info">#}
+            {#                                    <div class="info-title">{{ song.title }}</div>#}
+            {#                                    <div class="info-artist">BEARSON</div>#}
+            {#                                </div>#}
+            {#                            </li>#}
+            {#                            <audio id="{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}">#}
+            {#                                {% if song.file and request.user.is_authenticated %}#}
+            {#                                    <source src="{{ song.file.url }}" type="audio/mpeg">#}
+            {#                                {% elif song.sample and not request.user.is_authenticated %}#}
+            {#                                    <source src="{{ song.sample.url }}" type="audio/mpeg">#}
+            {#                                {% else %}#}
+            {#                                    No sources found#}
+            {#                                {% endif %}#}
+            {#                            </audio>#}
+            {#                        {% endfor %}#}
+            {#                    </ol>#}
+        </div>
+    </div>
     </div>
 {% endblock %}
