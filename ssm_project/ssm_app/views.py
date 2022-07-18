@@ -1,6 +1,6 @@
 from django.conf.global_settings import MEDIA_ROOT
 from django.contrib.auth.models import User
-from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, TemplateView
-from ssm_app.forms import CreateUserForm
+from ssm_app.forms import CreateUserForm, PasswordChangingForm
 from ssm_app.models import Song, Playlist, SubscriptionPlan
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
@@ -58,11 +58,6 @@ def show_blog_view(request):
     return render(
         request,
         template_name='blog.html')
-
-
-class MyPasswordChangeView(PasswordChangeView):
-    template_name = 'password_change.html'
-    success_url = reverse_lazy('/')
 
 
 class PlaylistCreateView(CreateView):
@@ -164,6 +159,7 @@ def logout_view(request):
 #     model = User
 
 # Defining a subscription plan view:
+@login_required(login_url='login')
 def subscribe_view(request):
     subscriptions = SubscriptionPlan.objects.all()
 
@@ -200,6 +196,7 @@ class CreateCheckoutSessionView(View):
 
 
 # Creating a succcess html template view:
+@login_required(login_url='login')
 def success_view(request):
     profile = Profile.objects.filter(user=request.user).first()
     profile.payed = True
@@ -208,5 +205,19 @@ def success_view(request):
 
 
 # Creating a cancel html template view:
+@login_required(login_url='login')
 def cancel_view(request):
     return render(request, template_name="stripe_payments/cancel.html", context={})
+
+
+# Creating a class for the change password functionality:
+class PasswordsChangeView(PasswordChangeView):
+    template_name = "registration/change_password.html"
+    # form_class = PasswordChangeForm
+    form_class = PasswordChangingForm
+    success_url = reverse_lazy('password_success')
+
+
+# Creating a function view for the success_password_change:
+def password_success(request):
+    return render(request, template_name="registration/password_success.html", context={})
