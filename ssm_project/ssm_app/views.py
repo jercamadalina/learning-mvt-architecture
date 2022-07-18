@@ -19,8 +19,8 @@ import stripe
 from django.views import View
 from django.conf import settings
 from django.views.generic import CreateView, ListView
-from ssm_app.forms import PlaylistForm
-from ssm_app.models import Song, Playlist
+from ssm_app.forms import *
+from ssm_app.models import *
 
 
 def homepage(request):
@@ -150,6 +150,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 class CreateCheckoutSessionView(View):
     def post(self, request, *args, **kwargs):
+        subscription_id = request.POST.get('subscription_id')
         stripe_subscription_id = request.POST.get('stripe_subscription_id')
         YOUR_DOMAIN = "http://127.0.0.1:8000/"
         checkout_session = stripe.checkout.Session.create(
@@ -164,11 +165,16 @@ class CreateCheckoutSessionView(View):
             success_url=YOUR_DOMAIN + 'success/',
             cancel_url=YOUR_DOMAIN + 'cancel/',
         )
+        profile = Profile.objects.filter(user=request.user).first()
+        profile.subscription_id = subscription_id
         return redirect(checkout_session.url, code=303)
 
 
 # Creating a succcess html template view:
 def success_view(request):
+    profile = Profile.objects.filter(user=request.user).first()
+    profile.payed = True
+    profile.save()
     return render(request, template_name="stripe_payments/success.html", context={})
 
 
