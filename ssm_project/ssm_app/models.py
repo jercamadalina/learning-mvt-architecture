@@ -54,9 +54,7 @@ class SubscriptionPlan(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     max_playlists = models.IntegerField()
     max_logins = models.IntegerField()  # Maximum logins automatically
+    stripe_subscription_id = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
-
-
-
