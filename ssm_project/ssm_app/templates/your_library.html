@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <script>
+        function goToYourPlaylist () {
+          window.location.href = '/your_playlist'
+        }
+</script>
+    {% load static %} <link rel="stylesheet" href="{% static '/css/your_library.css' %}">
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'>
+    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:100,400'>
+          <img src="{% static '/media/bgw.jpg' %}" class="d-block w-100" alt="...">
+                <div class="playlist_container">
+                    <h1 class="text-center library-title">Soundtrack your home</h1>
+                    <div class="music-player">
+                         {% for playlist in all_playlists %}
+                        <div class="player-main" onclick="goToYourPlaylist()">
+                                <div class="main-current">
+                                    <div class="current-keyvisual">
+                                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/329679/music-player-freebie-photo.png"/>
+                                    </div>
+                                    <div class="current-info">
+                                        <h1>{{ playlist.name }}</h1>
+                                        <p>KYLE</p>
+                                    </div>
+                                </div>
+                        </div>
+                        {% endfor %}
+{#                        <ul class="player-list">#}
+{#                            {% for song in playlist.songs %}#}
+{#                                <li onclick="document.getElementById('{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}').play()">#}
+{#                                    <div class="list-info">#}
+{#                                        <div class="info-title">{{ song.title }}</div>#}
+{#                                        <div class="info-artist">BEARSON</div>#}
+{#                                    </div>#}
+{#                                </li>#}
+{#                                <audio id="{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}">#}
+{#                                    {% if song.file and request.user.is_authenticated %}#}
+{#                                        <source src="{{ song.file.url }}" type="audio/mpeg">#}
+{#                                    {% elif song.sample and not request.user.is_authenticated %}#}
+{#                                        <source src="{{ song.sample.url }}" type="audio/mpeg">#}
+{#                                    {% else %}#}
+{#                                        No sources found#}
+{#                                    {% endif %}#}
+{#                                </audio>#}
+{#                            {% endfor %}#}
+{#                        </ul>#}
+                    </div>
+                </div>
+{% endblock %}

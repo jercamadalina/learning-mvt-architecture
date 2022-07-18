@@ -113,11 +113,13 @@ img.splash {
     color: #656262e0;
 }
 
-.author a,
+.blog_second-column .blog-entry-meta .author a,
 time {
     font-size: 0.7rem;
     color: #656262e0;
+    margin-left: 3rem !important;
 }
+
 
 .blog-entry-title a {
     color: #4e4c4ce0;

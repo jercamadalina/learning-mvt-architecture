@@ -1,3 +1,4 @@
+from django.conf.global_settings import MEDIA_ROOT
 from django.contrib.auth.models import User
 from django.contrib.auth.views import PasswordChangeView
 from django.shortcuts import render, redirect
@@ -29,17 +30,30 @@ def homepage(request):
         template_name='homepage.html')
 
 
-def show_music_view(request):
+def your_playlist(request):
     songs = Song.objects.all()
     playlist = Playlist.objects.all()
 
     return render(
         request,
-        template_name='music.html',
+        template_name='your_playlist.html',
         context={'songs': songs, 'playlists': playlist})
 
 
-@login_required
+def show_music_view(request):
+    songs = Song.objects.all()
+    playlist = Playlist.objects.all()
+    search_text = request.GET.get('search', '')
+
+    if search_text:
+        songs = songs.filter(title__contains=search_text)
+
+    return render(
+        request,
+        template_name='music.html',
+        context={'songs': songs, 'search_text': search_text, 'playlists': playlist})
+
+
 def show_blog_view(request):
     return render(
         request,
@@ -69,7 +83,7 @@ class PlaylistCreateView(CreateView):
 class PlaylistListView(ListView):
     model = Playlist
     context_object_name = 'all_playlists'
-    template_name = 'playlist_list.html'
+    template_name = 'your_library.html'
 
 
 def add_song_to_playlist_view(request):
