@@ -31,7 +31,6 @@ def homepage(request):
 
 
 def your_playlist(request, pk):
-
     playlist = Playlist.objects.get(id=pk)
 
     return render(
@@ -65,12 +64,19 @@ class PlaylistCreateView(CreateView):
     form_class = PlaylistForm
     template_name = 'playlist_create.html'
 
-    def form_valid(self, form):
-        pass
-    # success_url = reverse_lazy('playlist')
-
-# todo fix when no song_id present
+    # todo fix when no song_id present
     def get_success_url(self):
+        profile = Profile.objects.filter(user=self.request.user).first()
+
+        if profile.subscription is None:
+            self.object.delete()
+            return reverse_lazy('ceva_nume_de_pagina_de_eroare_ca_nu_ai_subscription')
+
+        playlists = Playlist.objects.filter(user=self.request.user)
+        if playlists.count() >= profile.subscription.max_playlists:
+            self.object.delete()
+            return reverse_lazy('ceva_nume_de_pagina_de_eroare_ca_ai_prea_multe_playlisturi')
+
         if 'song_id' in self.request.GET:
             playlist = self.object
             song_id = self.request.GET['song_id']
@@ -115,6 +121,7 @@ def delete_song_from_playlist(request, id):
     song_id = Song.objects.get(id=id)
     song_id.delete()
     return redirect(request.META['HTTP_REFERER'])
+
 
 # Defining a register view:
 def register_view(request):
