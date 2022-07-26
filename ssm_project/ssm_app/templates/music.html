@@ -69,15 +69,8 @@
                                                 {% endfor %}
                                             </div>
                                         </div>
-                                        <i class="fa fa-solid fa-play ml-3"></i>
-                                        <audio>
-                                            {% if song.file and request.user.is_authenticated %}
-                                                <source src="{{ song.file.url }}" type="audio/mpeg">
-                                            {% elif song.sample and not request.user.is_authenticated %}
-                                                <source src="{{ song.sample.url }}" type="audio/mpeg">
-                                            {% else %}
-                                                No sources found
-                                            {% endif %}
+                                        <i class="fa fa-solid fa-play ml-3" onclick="play('{{ forloop.counter0 }}')"></i>
+                                        <audio id="{{ forloop.counter0 }}" src="{% if song.file and request.user.is_authenticated %}{{ song.file.url }}{% elif song.sample and not request.user.is_authenticated %}{{ song.sample.url }}{% endif %}">
                                         </audio>
                                         {#<i class="fa fa-solid fa-pause ml-3"></i>#}
                                     </div>

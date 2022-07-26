@@ -65,15 +65,18 @@ class PlaylistCreateView(CreateView):
     form_class = PlaylistForm
     template_name = 'playlist_create.html'
 
+    def form_valid(self, form):
+        pass
     # success_url = reverse_lazy('playlist')
 
 # todo fix when no song_id present
     def get_success_url(self):
-        playlist = self.object
-        song_id = self.request.GET['song_id']
-        song = Song.objects.get(id=song_id)
-        song.playlists.add(playlist)
-        song.save()
+        if 'song_id' in self.request.GET:
+            playlist = self.object
+            song_id = self.request.GET['song_id']
+            song = Song.objects.get(id=song_id)
+            song.playlists.add(playlist)
+            song.save()
 
         next_ = self.request.GET.get('next')
         if next_ is not None:
@@ -107,6 +110,11 @@ def add_song_to_playlist_view(request):
     return redirect(
         request.META['HTTP_REFERER'])  # Prin redirect, redirectionam userul catre locul unde a fost ultima oara
 
+
+def delete_song_from_playlist(request, id):
+    song_id = Song.objects.get(id=id)
+    song_id.delete()
+    return redirect(request.META['HTTP_REFERER'])
 
 # Defining a register view:
 def register_view(request):

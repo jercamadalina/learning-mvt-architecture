@@ -16,27 +16,25 @@
                     <th class="containerTable-lblTitle">ARTIST</th>
                     <th class="containerTable-lblTitle">DURATION</th>
                     <th class="containerTable-lblTitle">PLAY</th>
+                    <th class="containerTable-lblTitle">DELETE</th>
                 </tr>
                 </thead>
                 {#                     {% for playlist in playlists %}#}
                 {% for song in playlist.songs %}
                     <tbody class="containerTable-body">
-                    <tr onclick="document.getElementById('{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}').play()">
+                    {#                    document.getElementById('{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}').play()#}
+                    <tr>
                         {#                        <td class="containerTable-lblValue">1</td>#}
                         <td class="containerTable-lblValue">{{ song.title }}</td>
                         <td class="containerTable-lblValue">Maria Anders</td>
                         <td class="containerTable-lblValue">03:24</td>
-                        <td class="containerTable-lblValue"><i class="fa fa-play"></i></td>
+                        <td class="containerTable-lblValue"><i onclick="play('{{ forloop.counter0 }}');"
+                                                               class="fa fa-play play-pause paused"></i></td>
+                        <td class="containerTable-lblValue"><a href="{% url 'delete' song.id %}">Delete</a></td>
                     </tr>
                     </tbody>
-                    <audio id="{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}">
-                        {% if song.file and request.user.is_authenticated %}
-                            <source src="{{ song.file.url }}" type="audio/mpeg">
-                        {% elif song.sample and not request.user.is_authenticated %}
-                            <source src="{{ song.sample.url }}" type="audio/mpeg">
-                        {% else %}
-                            No sources found
-                        {% endif %}
+                    <audio id="{{ forloop.counter0 }}" src="
+                            {% if song.file and request.user.is_authenticated %}{{ song.file.url }}{% elif song.sample and not request.user.is_authenticated %}{{ song.sample.url }}{% endif %}">
                     </audio>
                 {% endfor %}
                 {#                         {% endfor %}#}

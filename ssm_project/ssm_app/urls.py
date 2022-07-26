@@ -45,7 +45,7 @@ urlpatterns = [
     path('cancel/', cancel_view, name='cancel'),
     path('music/', show_music_view, name='music'),
     path('blog/', show_blog_view, name='blog'),
-    path('password-change/', MyPasswordChangeView.as_view(), name='password_change'),
+    path('password-change/', PasswordChangeView.as_view(), name='password_change'),
     path('subscription/', subscribe_view, name='subscribe'),
     path('register/', register_view, name='register'),
     path('login/', login_view, name='login'),
@@ -53,4 +53,5 @@ urlpatterns = [
     path('create-checkout-session/', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
     # path('subscription/', show_subscription_view, name="subscription"),
     path('your_playlist/<int:pk>/', your_playlist, name='your_playlist'),
+    path('delete/<int:id>/', delete_song_from_playlist, name='delete'),
 ]
