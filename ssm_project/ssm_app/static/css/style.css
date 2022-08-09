@@ -13,7 +13,8 @@ body {
 }
 
 #navbarMenuHeroA .navbar-nav .nav-item .dropdown-menu {
-    position: absolute;
+  position: absolute;
+  margin-left: auto;
 }
 
 div#navbarMenuHeroA {
