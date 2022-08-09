@@ -8,8 +8,12 @@ body {
 }
 
 /* Navigation bar */
-.navbar-end a.navbar-item-playlist {
+.navbar-nav .navbar-end a.navbar-item-playlist {
   display: none;
+}
+
+#navbarMenuHeroA .navbar-nav .nav-item .dropdown-menu {
+    position: absolute;
 }
 
 div#navbarMenuHeroA {
