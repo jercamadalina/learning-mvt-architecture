@@ -11,222 +11,200 @@
     {% load static %}
     <link rel="stylesheet" href="{% static '/css/style.css' %}">
 </head>
-<body>
-<!-- NAVBAR -->
-<div class="nav-container hero-head">
-    <nav class="navbar hp-nav px-4 container is-fluid">
-        <div class="container">
-            <div class="navbar-brand">
-                <a>
-                    <img src="{% static '/media/aaa.png' %}" class="logo-ssm" alt="logo" width="220" height="40"/>
-                </a>
-                <span class="navbar-burger" data-target="navbarMenuHeroA">
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
-            </div>
-        </div>
-        <div id="navbarMenuHeroA" class="navbar-menu">
-            <form class="form-inline my-2 my-lg-0" id="search-form" method="get" action="{% url 'music' %}">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search"
-                       value="{{ search_text }}">
-                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
-
-            {#              old #}
-            {#            <form class="form-inline my-2 my-lg-0">#}
-            {#                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
-            {#                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>#}
-            {#            </form>#}
-            <div class="navbar-end">
-                <a class="navbar-item is-uppercase is-active" href="/">
-                    Home
-                </a>
-                <a class="navbar-item is-uppercase" href="/blog">
-                    Blog
-                </a>
-                <a class="navbar-item is-uppercase" href="{% url 'music' %}">
-                    Music
-                </a>
-                {% if request.user.is_authenticated %}
-                    <a class="navbar-item is-uppercase" href="{% url 'playlist' %}">
-                        Your Library
-                    </a>
-                {% endif %}
-                <a class="navbar-item is-uppercase" href="{% url 'subscribe' %}">
-                    Subscription
-                </a>
-
-            </div>
-
-            <div class="navbar-nav ml-auto">
-                <div class="nav-item dropdown">
-                    {% if user.is_authenticated %}
-                        <a class="nav-link active dropdown-toggle" href="#" data-toggle="dropdown">
-                            {% if user.first_name %}Hello, {{ user.first_name }}!
-                            {% else %}Hello, {{ user.username }}!{% endif %}
+    <body>
+        <!-- NAVBAR -->
+        <div class="nav-container hero-head">
+            <nav class="navbar hp-nav px-4 container is-fluid">
+                <div class="container">
+                    <div class="navbar-brand">
+                        <a>
+                            <img src="{% static '/media/logo.png' %}" class="logo-ssm" alt="logo" width="220" height="40"/>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item text-right" href="{% url 'logout' %}">Logout</a>
-                            <a class="dropdown-item text-right" href="{% url 'change_password' %}">Change password</a>
-                        </div>
-                    {% else %}
-                        <a class="nav-link active dropdown-toggle" href="#" data-toggle="dropdown">
-                            You are not logged in.
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item text-right" href="{% url 'login' %}">Login</a>
-                            <a class="dropdown-item text-right" href="{% url 'register' %}">Sign up</a>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-    </nav>
-</div>
-
-{% block content %}
-{% endblock %}
-
-<!-- AUDIO PLAYER -->
-{#<audio id="player" src= "#"></audio>#}
-{#<div>#}
-{#    <div class="btn_previous"></div>#}
-{#    <button class="btn_play" onclick="document.getElementById('player').play()">Play</button>#}
-{#    <button class="btn_pause" onclick = "document.getElementById('player').pause()">Pause</button>#}
-{#    <div class="btn_next"></div>#}
-{#   <button onclick="document.getElementById('player').volume += 0.2">Vol+</button>#}
-{#   <button onclick="document.getElementById('player').volume -= 0.2">Vol-</button>#}
-{#</div>#}
-
-<div class="player paused">
-    <div class="info">
-        <div class="time">
-            <span class="current-time">0:00</span>
-            <span class="progress"><span></span></span>
-            <span class="duration">0:00</span>
-        </div>
-    </div>
-    <div class="actions">
-        <button class="shuffle">
-            <div class="arrow"></div>
-            <div class="arrow"></div>
-        </button>
-        <button class="button rw" onclick="previous()">
-            <div class="arrow"></div>
-            <div class="arrow"></div>
-        </button>
-        <button class="button play-pause" id="play_button">
-            <div class="arrow"></div>
-        </button>
-        <button class="button ff" onclick="fastForward()">
-            <div class="arrow"></div>
-            <div class="arrow"></div>
-        </button>
-        <button class="repeat"></button>
-    </div>
-    <audio id="main_audio_tag"
-           src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/38273/Wordburglar_Drawings_with_Words.mp3"></audio>
-</div>
-
-
-<!-- FOOTER -->
-<footer class="footer">
-    <div class="section">
-        <div class="columns">
-            <div class="column is-half">
-                <div class="content">
-                    <h3 class="has-text-black is-uppercase is-size-6">About</h3>
-                    <p class="has-text-grey text-justify">SSM CODE WANTS TO BE SIMPLE is an initiative
-                        to help the upcoming programmers with the code. SSM focuses on providing the most
-                        efficient code or snippets as the code wants to be simple. We will help programmers build up
-                        concepts in different programming languages that include C, C++, Java, HTML, CSS, Bootstrap,
-                        JavaScript, PHP, Android, SQL and Algorithm. SSM.com CODE WANTS TO BE SIMPLE is an
-                        initiative to help the upcoming programmers with the code. SSM focuses on providing the
-                        most efficient code or snippets as the code wants to be simple. We will help programmers build
-                        up concepts in different programming languages that include C, C++, Java.
-                    </p>
-                </div>
-            </div>
-            <div class="column">
-                <div class="content">
-                    <h3 class="has-text-black is-uppercase is-size-6">Categories</h3>
-                </div>
-                <ul class="has-text-grey">
-                    <li><a class="has-text-grey sublink:hover" href="#">C</a></li>
-                    <li><a class="has-text-grey sublink" href="#">UI Design</a></li>
-                    <li><a class="has-text-grey sublink" href="#">PHP</a></li>
-                    <li><a class="has-text-grey sublink" href="#">Java</a></li>
-                    <li><a class="has-text-grey sublink" href="#">Android</a></li>
-                    <li><a class="has-text-grey sublink" href="#">Templates</a></li>
-                </ul>
-            </div>
-            <div class="column">
-                <div class="content">
-                    <h3 class="has-text-black is-uppercase is-size-6">Links</h3>
-                </div>
-                <ul class="has-text-grey">
-                    <li><a class="has-text-grey sublink is-hoverable" href="#">About Us</a></li>
-                    <li><a class="has-text-grey sublink" href="#">Contact Us</a></li>
-                    <li><a class="has-text-grey sublink" href="#">Contribute</a></li>
-                    <li><a class="has-text-grey sublink" href="#">Privacy Policy</a></li>
-                    <li><a class="has-text-grey sublink" href="#">Sitemap</a></li>
-                </ul>
-            </div>
-        </div>
-        <hr>
-        <div class="columns">
-            <div class="column mt-6">
-                <p class="has-text-grey copyright-text">Copyright &copy; 2021 All Rights Reserved by
-                    <a class="has-text-grey sublink" href="#">SSM</a>.
-                </p>
-            </div>
-            <div class="column mt-6">
-                    <span class="is-medium">
-                        <ul class="social-icons is-flex is-justify-content-flex-end">
-                            <li><a class="mr-2" href="#"><i class="fab fa-lg fa-facebook"></i></a></li>
-                            <li><a class="mr-2" href="#"><i class="fab fa-lg fa-twitter"></i></a></li>
-                            <li><a class="mr-2" href="#"><i class="fab fa-lg fa-dribbble"></i></a></li>
-                            <li><a class="mr-2" href="#"><i class="fab fa-lg fa-linkedin"></i></a></li>
-                        </ul>
+                        <span class="navbar-burger" data-target="navbarMenuHeroA">
+                      <span></span>
+                      <span></span>
+                      <span></span>
                     </span>
-            </div>
+                    </div>
+                </div>
+                <div id="navbarMenuHeroA" class="navbar-menu">
+                    <form class="form-inline my-2 my-lg-0" id="search-form" method="get" action="{% url 'music' %}">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search"
+                               value="{{ search_text }}">
+                        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                    <div class="navbar-end">
+                        <a class="navbar-item is-uppercase is-active" href="/">
+                            Home
+                        </a>
+                        <a class="navbar-item is-uppercase" href="/blog">
+                            Blog
+                        </a>
+                        <a class="navbar-item is-uppercase" href="{% url 'music' %}">
+                            Music
+                        </a>
+                        {% if request.user.is_authenticated %}
+                            <a class="navbar-item is-uppercase" href="{% url 'your-library' %}">
+                                Your Library
+                            </a>
+                        {% endif %}
+                        <a class="navbar-item is-uppercase" href="{% url 'subscribe' %}">
+                            Subscription
+                        </a>
+                    </div>
+                    <div class="navbar-nav ml-auto">
+                        <div class="nav-item dropdown">
+                            {% if user.is_authenticated %}
+                                <a class="nav-link active dropdown-toggle" href="#" data-toggle="dropdown">
+                                    {% if user.first_name %}Hello, {{ user.first_name }}!
+                                    {% else %}Hello, {{ user.username }}!{% endif %}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item text-right" href="{% url 'logout' %}">Logout</a>
+                                    <a class="dropdown-item text-right" href="{% url 'change_password' %}">Change password</a>
+                                </div>
+                            {% else %}
+                                <a class="nav-link active dropdown-toggle" href="#" data-toggle="dropdown">
+                                    You are not logged in.
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item text-right" href="{% url 'login' %}">Login</a>
+                                    <a class="dropdown-item text-right" href="{% url 'register' %}">Sign up</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+            </nav>
         </div>
-    </div>
-</footer>
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
-<script src="{% static 'js/audio-player.js' %}"></script>
-<script src="{% static 'js/register.js' %}"></script>
 
-</body>
+        {% block content %}
+        {% endblock %}
+
+        <div class="player paused">
+            <div class="info">
+                <div class="time">
+                    <span class="current-time">0:00</span>
+                    <span class="progress"><span></span></span>
+                    <span class="duration">0:00</span>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="shuffle">
+                    <div class="arrow"></div>
+                    <div class="arrow"></div>
+                </button>
+                <button class="button rw" onclick="previous()">
+                    <div class="arrow"></div>
+                    <div class="arrow"></div>
+                </button>
+                <button class="button play-pause" id="play_button">
+                    <div class="arrow"></div>
+                </button>
+                <button class="button ff" onclick="fastForward()">
+                    <div class="arrow"></div>
+                    <div class="arrow"></div>
+                </button>
+                <button class="repeat"></button>
+            </div>
+            <audio id="main_audio_tag"
+                   src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/38273/Wordburglar_Drawings_with_Words.mp3"></audio>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="section">
+                <div class="columns">
+                    <div class="column is-half">
+                        <div class="content">
+                            <h3 class="has-text-black is-uppercase is-size-6">About</h3>
+                            <p class="has-text-grey text-justify">SSM CODE WANTS TO BE SIMPLE is an initiative
+                                to help the upcoming programmers with the code. SSM focuses on providing the most
+                                efficient code or snippets as the code wants to be simple. We will help programmers build up
+                                concepts in different programming languages that include C, C++, Java, HTML, CSS, Bootstrap,
+                                JavaScript, PHP, Android, SQL and Algorithm. SSM.com CODE WANTS TO BE SIMPLE is an
+                                initiative to help the upcoming programmers with the code. SSM focuses on providing the
+                                most efficient code or snippets as the code wants to be simple. We will help programmers build
+                                up concepts in different programming languages that include C, C++, Java.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="content">
+                            <h3 class="has-text-black is-uppercase is-size-6">Categories</h3>
+                        </div>
+                        <ul class="has-text-grey">
+                            <li><a class="has-text-grey sublink:hover" href="#">C</a></li>
+                            <li><a class="has-text-grey sublink" href="#">UI Design</a></li>
+                            <li><a class="has-text-grey sublink" href="#">PHP</a></li>
+                            <li><a class="has-text-grey sublink" href="#">Java</a></li>
+                            <li><a class="has-text-grey sublink" href="#">Android</a></li>
+                            <li><a class="has-text-grey sublink" href="#">Templates</a></li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <div class="content">
+                            <h3 class="has-text-black is-uppercase is-size-6">Links</h3>
+                        </div>
+                        <ul class="has-text-grey">
+                            <li><a class="has-text-grey sublink is-hoverable" href="#">About Us</a></li>
+                            <li><a class="has-text-grey sublink" href="#">Contact Us</a></li>
+                            <li><a class="has-text-grey sublink" href="#">Contribute</a></li>
+                            <li><a class="has-text-grey sublink" href="#">Privacy Policy</a></li>
+                            <li><a class="has-text-grey sublink" href="#">Sitemap</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+                <div class="columns">
+                    <div class="column mt-6">
+                        <p class="has-text-grey copyright-text">Copyright &copy; 2021 All Rights Reserved by
+                            <a class="has-text-grey sublink" href="#">SSM</a>.
+                        </p>
+                    </div>
+                    <div class="column mt-6">
+                            <span class="is-medium">
+                                <ul class="social-icons is-flex is-justify-content-flex-end">
+                                    <li><a class="mr-2" href="#"><i class="fab fa-lg fa-facebook"></i></a></li>
+                                    <li><a class="mr-2" href="#"><i class="fab fa-lg fa-twitter"></i></a></li>
+                                    <li><a class="mr-2" href="#"><i class="fab fa-lg fa-dribbble"></i></a></li>
+                                    <li><a class="mr-2" href="#"><i class="fab fa-lg fa-linkedin"></i></a></li>
+                                </ul>
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+                integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+                integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+                crossorigin="anonymous"></script>
+        <script src="{% static 'js/audio-player.js' %}"></script>
+    </body>
 </html>
 
 

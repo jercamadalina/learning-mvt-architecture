@@ -1,21 +1,9 @@
-from django.conf.global_settings import MEDIA_ROOT
-from django.contrib.auth.models import User
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeForm
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
-
-# Create your views here.
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, TemplateView
-from ssm_app.forms import CreateUserForm, PasswordChangingForm
-from ssm_app.models import Song, Playlist, SubscriptionPlan
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.forms import UserCreationForm
-
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
 import stripe
 from django.views import View
 from django.conf import settings
@@ -92,7 +80,7 @@ class PlaylistCreateView(CreateView):
         return valid
 
 
-class PlaylistListView(ListView):
+class YourLibraryView(ListView):
     model = Playlist
     context_object_name = 'all_playlists'
     template_name = 'your_library.html'

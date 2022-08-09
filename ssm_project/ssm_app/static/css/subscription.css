@@ -1,24 +1,3 @@
-/** {*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*    box-sizing: border-box;*/
-/*    font-family: 'Poppins', 'sans-serif';*/
-
-/*}*/
-
-/*.container {*/
-/*    width: 100%;*/
-/*    min-height: 100vh;*/
-/*    background: #2c2f33;*/
-/*}*/
-
-/*.container h2 {*/
-/*    color: #ffffff;*/
-/*    font-size: 32px;*/
-/*    padding: 50px 0;*/
-/*    text-align: center;*/
-/*}*/
-
 .container.subscription {
     display: flex;
     justify-content: center;
@@ -36,8 +15,6 @@
 
 .price-row {
     width: 90%;
-    /*max-width: 1100px;*/
-    /*margin: auto;*/
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 25px;
@@ -80,7 +57,6 @@
     list-style: none;
 }
 
-
 .price-col ul li {
     margin: 1em 0;
 
@@ -108,8 +84,6 @@
     font-size: 1.2rem;
     cursor: pointer;
     transition: background 0.5s;
-
-
 }
 
 .price-col button:hover{

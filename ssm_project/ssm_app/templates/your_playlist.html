@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <script>
-
-    </script>
     <link rel="stylesheet" href="{% static '/css/your_playlist.css' %}">
     <img src="{% static '/media/bgw.jpg' %}" class="d-block w-100" alt="...">
     <div class="container playlist">
@@ -11,7 +8,6 @@
             <table class="player-list container-table">
                 <thead>
                 <tr>
-                    {#                          <th class="containerTable-lblTitle">#</th>#}
                     <th class="containerTable-lblTitle">TITLE</th>
                     <th class="containerTable-lblTitle">ARTIST</th>
                     <th class="containerTable-lblTitle">DURATION</th>
@@ -19,17 +15,15 @@
                     <th class="containerTable-lblTitle">DELETE</th>
                 </tr>
                 </thead>
-                {#                     {% for playlist in playlists %}#}
                 {% for song in playlist.songs %}
                     <tbody class="containerTable-body">
-                    {#                    document.getElementById('{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}').play()#}
                     <tr>
-                        {#                        <td class="containerTable-lblValue">1</td>#}
                         <td class="containerTable-lblValue">{{ song.title }}</td>
                         <td class="containerTable-lblValue">Maria Anders</td>
                         <td class="containerTable-lblValue">03:24</td>
-                        <td class="containerTable-lblValue"><i onclick="play('{{ forloop.counter0 }}');"
-                                                               class="fa fa-play play-pause paused"></i></td>
+                        <td class="containerTable-lblValue">
+                            <i onclick="play('{{ forloop.counter0 }}');" class="fa fa-play play-pause paused"></i>
+                        </td>
                         <td class="containerTable-lblValue"><a href="{% url 'delete' song.id %}">Delete</a></td>
                     </tr>
                     </tbody>
@@ -37,27 +31,7 @@
                             {% if song.file and request.user.is_authenticated %}{{ song.file.url }}{% elif song.sample and not request.user.is_authenticated %}{{ song.sample.url }}{% endif %}">
                     </audio>
                 {% endfor %}
-                {#                         {% endfor %}#}
             </table>
-            {#                    <ol class="player-list">#}
-            {#                        {% for song in playlist.songs %}#}
-            {#                            <li onclick="document.getElementById('{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}').play()">#}
-            {#                                <div class="list-info">#}
-            {#                                    <div class="info-title">{{ song.title }}</div>#}
-            {#                                    <div class="info-artist">BEARSON</div>#}
-            {#                                </div>#}
-            {#                            </li>#}
-            {#                            <audio id="{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}">#}
-            {#                                {% if song.file and request.user.is_authenticated %}#}
-            {#                                    <source src="{{ song.file.url }}" type="audio/mpeg">#}
-            {#                                {% elif song.sample and not request.user.is_authenticated %}#}
-            {#                                    <source src="{{ song.sample.url }}" type="audio/mpeg">#}
-            {#                                {% else %}#}
-            {#                                    No sources found#}
-            {#                                {% endif %}#}
-            {#                            </audio>#}
-            {#                        {% endfor %}#}
-            {#                    </ol>#}
         </div>
     </div>
     </div>

@@ -130,12 +130,6 @@ time {
 }
 
 .blog_first-column {
-    /* display: table-cell;
-    vertical-align: top;
-    margin-top: 1.5rem;
-    margin-right: 2rem;
-    width: 70px;
-    text-align: center; */
     width: 3rem;
     margin-top: 3.5rem;
     margin-left: 2rem;
@@ -168,8 +162,6 @@ article figure img {
     border-radius: 60% 40% 40% 20%;
     position: absolute;
     left: 5rem;
-    /*border-top-left-radius: none !important;*/
-    /*border-top-right-radius: none !important;*/
 }
 
 .hover01 figure img {

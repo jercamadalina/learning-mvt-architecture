@@ -4,7 +4,8 @@ var player = $('.player'),
     currentTime = $('.current-time'),
     progressBar = $('.progress span'),
     mouseDown = false,
-    rewind, showCurrentTime;
+    rewind, showCurrentTime,
+    songPlaying = null;
 
 function secsToMins(time) {
     var int = Math.floor(time),
@@ -42,7 +43,6 @@ audio.on('loadedmetadata', function () {
     }
 });
 
-var songPlaying = null;
 
 function fastForward() {
     let nextId = (parseInt(songPlaying) + 1);
@@ -57,17 +57,16 @@ function previous() {
 
 function play(idAudioTag) {
     let audioTag = document.getElementById(idAudioTag);
+
     if (audioTag !== null) {
         songPlaying = idAudioTag;
         let self = $('#play_button');
         let mainAudioTag = document.getElementById('main_audio_tag');
+
         mainAudioTag.pause();
-        // console.log(mainAudioTag);
-        // console.log(audioTag);
-        // console.log(mainAudioTag.src);
-        // console.log(audioTag.src);
         mainAudioTag.src = audioTag.src;
         mainAudioTag.play();
+
         if (self.hasClass('play-pause') && player.hasClass('paused')) {
             player.removeClass('paused').addClass('playing');
             getCurrentTime();
@@ -77,9 +76,9 @@ function play(idAudioTag) {
 
 
 function pause(idPlayButton, idAudioTag) {
-
     let self = $(idPlayButton);
     let audioTag = $(idAudioTag);
+
     if (self.hasClass('play-pause') && player.hasClass('playing')) {
         player.removeClass('playing').addClass('paused');
         audioTag.pause();
@@ -87,20 +86,17 @@ function pause(idPlayButton, idAudioTag) {
 }
 
 function playPause() {
-    console.log('playPause...');
     var self = $(this);
     let playButton = $('#play_button');
     let audioTag = document.getElementById('main_audio_tag');
+
     //todo: add src
     if (self.hasClass('play-pause') && player.hasClass('paused')) {
         player.removeClass('paused').addClass('playing');
-        // playButton.play();
         audioTag.play();
-
         getCurrentTime();
     } else if (self.hasClass('play-pause') && player.hasClass('playing')) {
         player.removeClass('playing').addClass('paused');
-        // playButton.pause();
         audioTag.pause();
     }
 

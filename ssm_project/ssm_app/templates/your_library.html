@@ -13,7 +13,6 @@
     <img src="{% static '/media/bgw.jpg' %}" class="d-block w-100" alt="...">
     <div class="playlist_container">
         <h1 class="text-center library-title">Soundtrack your home</h1>
-
        <div class="player-main" id="create-playlist">
             <div class="main-current">
                 <div class="current-keyvisual">
@@ -26,17 +25,8 @@
                 </div>
             </div>
         </div>
-
         <div class="music-player">
             {% for playlist in all_playlists %}
-{##}
-{#                    <!-- Button trigger modal -->#}
-{#                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">#}
-{#                        Launch demo modal#}
-{#                    </button>#}
-{##}
-{#                    <!-- Modal -->#}
-
                 <div class="player-main" onclick="goToYourPlaylist('{{ playlist.id }}')">
                     <div class="main-current">
                         <div class="current-keyvisual">
@@ -49,25 +39,6 @@
                     </div>
                 </div>
             {% endfor %}
-            {#                        <ul class="player-list">#}
-            {#                            {% for song in playlist.songs %}#}
-            {#                                <li onclick="document.getElementById('{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}').play()">#}
-            {#                                    <div class="list-info">#}
-            {#                                        <div class="info-title">{{ song.title }}</div>#}
-            {#                                        <div class="info-artist">BEARSON</div>#}
-            {#                                    </div>#}
-            {#                                </li>#}
-            {#                                <audio id="{{ forloop.counter0 }}_{{ forloop.parentloop.counter0 }}">#}
-            {#                                    {% if song.file and request.user.is_authenticated %}#}
-            {#                                        <source src="{{ song.file.url }}" type="audio/mpeg">#}
-            {#                                    {% elif song.sample and not request.user.is_authenticated %}#}
-            {#                                        <source src="{{ song.sample.url }}" type="audio/mpeg">#}
-            {#                                    {% else %}#}
-            {#                                        No sources found#}
-            {#                                    {% endif %}#}
-            {#                                </audio>#}
-            {#                            {% endfor %}#}
-            {#                        </ul>#}
         </div>
     </div>
 

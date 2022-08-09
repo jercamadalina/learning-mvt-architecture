@@ -17,7 +17,6 @@ thead {
 }
 
 tbody tr {
-        /*transition: all .2s ease-in-out;*/
         transition: transform 330ms ease-in-out;
 
 }
@@ -27,9 +26,7 @@ tbody tr:hover {
     transform: scale(1.02);
 }
 
-
 td, th {
-  /*border: 1px solid #eeeeee;*/
   text-align: left;
   padding: 12px;
 }
@@ -43,7 +40,6 @@ tr:nth-child(even) {
     color: #000000;
 }
 
-
 .container-table {
     width: 100%;
     padding: 20px;
@@ -56,15 +52,12 @@ tr:nth-child(even) {
     padding-bottom: 10px;
     font-size: 20px;
     font-weight: bolder;
-
 }
-
 
 .containerTable-lblValue {
     text-align: center;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.11);
-
     transition: box-shadow .5s, transform .5s, color .5s;
 }
 

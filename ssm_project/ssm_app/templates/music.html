@@ -21,34 +21,25 @@
                             <div class="column music_second-column">
                                 <!-- MUSIC HEADER -->
                                 <header class="music-entry-header">
-                                    <h2 class="music-entry-title mt-4"><a href="#"
-                                                                          class="is-size-5">{{ song.title }}</a></h2>
+                                    <h2 class="music-entry-title mt-4"><a href="#" class="is-size-5">{{ song.title }}</a></h2>
                                     <p class="">The Script</p>
-
                                 </header>
                                 <!-- MUSIC CONTENT -->
                                 <div class="music-entry-content">
                                     <p>Description of the song: {{ song.description }}</p>
                                 </div>
                                 <!-- MUSIC FOOTER -->
-
                                 <footer class="music-entry-footer row">
                                     <div class="read-more col-md-6">
-
                                         <div class="dropdown">
-
                                             <button class="btn btn-secondary dropdown-toggle dropdown-playlist"
                                                     type="button"
                                                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false">
-
                                                 <i class="fa fa-solid fa-plus ml-3"></i>
-
                                             </button>
-
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <form method="get" action="{% url 'playlist_create' %}">
-
                                                     <input type="hidden" name="next" value="{{ request.path }}">
                                                     <input type="hidden" name="song_id" value="{{ song.id }}">
                                                     <button class="dropdown-item"
@@ -72,7 +63,6 @@
                                         <i class="fa fa-solid fa-play ml-3" onclick="play('{{ forloop.counter0 }}')"></i>
                                         <audio id="{{ forloop.counter0 }}" src="{% if song.file and request.user.is_authenticated %}{{ song.file.url }}{% elif song.sample and not request.user.is_authenticated %}{{ song.sample.url }}{% endif %}">
                                         </audio>
-                                        {#<i class="fa fa-solid fa-pause ml-3"></i>#}
                                     </div>
                                 </footer>
                             </div>
