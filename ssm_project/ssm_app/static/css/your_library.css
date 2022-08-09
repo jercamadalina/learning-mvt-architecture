@@ -26,6 +26,9 @@ a.navbar-item-playlist:hover {
     transition: all .2s ease-in-out;
 }
 
+.playlist_container .player-main#create-playlist {
+    margin: auto;
+}
 
 .player-main:hover {
     transform: scale(1.1);
