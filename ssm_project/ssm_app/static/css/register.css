@@ -1,4 +1,4 @@
-.login {
+.register {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,10 +6,10 @@
 }
 
 .user_card {
-    width: 360px;
-    height: 310px;
+    width: 380px;
+    height: 410px;
     display: flex;
-    margin-top: 60px;
+    margin-top: 150px;
     justify-content: center;
     flex-direction: column;
     border-radius: 5px;
@@ -29,7 +29,7 @@
 
 .login_btn {
     width: 100%;
-    background: #313536 !important;
+     background: #313536 !important;
     color: white !important;
 }
 
@@ -53,13 +53,6 @@
 .input_pass:focus {
     box-shadow: none !important;
     outline: 0px !important;
-}
-
-#messages {
-    background-color: grey;
-    color: #fff;
-    padding: 10px;
-    margin-top: 10px;
 }
 
 .player {
